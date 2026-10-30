@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>CV Jihed Chiha</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    @page {
+      size: A4;
+      margin: 10mm 12mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Barre d'action supérieure pour téléchargement/impression */
+    .action-bar {
+      position: sticky;
+      top: 0;
+      background: #0f172a;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn-download {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-download:hover {
+      background: #0369a1;
+    }
+
+    @media print {
+      .action-bar {
+        display: none !important;
+      }
+      body {
+        padding: 0 !important;
+        background: #fff !important;
+      }
+      .cv-container {
+        box-shadow: none !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+      }
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #1e293b;
+      background: #f1f5f9;
+      line-height: 1.35;
+      font-size: 9.5pt;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .cv-container {
+      max-width: 210mm;
+      min-height: 297mm;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 15mm 16mm;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      border-radius: 4px;
+    }
+
+    /* En-tête */
+    .header {
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .header-left h1 {
+      font-size: 20pt;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+    }
+
+    .header-left h2 {
+      font-size: 11pt;
+      font-weight: 600;
+      color: #0284c7;
+      margin-top: 2px;
+    }
+
+    .header-right {
+      text-align: right;
+      font-size: 8.5pt;
+      color: #475569;
+      line-height: 1.4;
+    }
+
+    .header-right a {
+      color: #0284c7;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 9px;
+    }
+
+    .section-title {
+      font-size: 10pt;
+      font-weight: 700;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 2px;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 12px;
+      background: #0284c7;
+      border-radius: 2px;
+    }
+
+    /* Profil */
+    .profile-text {
+      font-size: 8.8pt;
+      color: #334155;
+      text-align: justify;
+      line-height: 1.4;
+    }
+
+    /* Grille de compétences */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3px;
+      font-size: 8.8pt;
+    }
+
+    .skill-row {
+      display: flex;
+      line-height: 1.35;
+    }
+
+    .skill-category {
+      font-weight: 600;
+      color: #0f172a;
+      min-width: 170px;
+      flex-shrink: 0;
+    }
+
+    .skill-list {
+      color: #334155;
+    }
+
+    /* Projets & Expérience */
+    .item {
+      margin-bottom: 6px;
+    }
+
+    .item:last-child {
+      margin-bottom: 0;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1px;
+    }
+
+    .item-title {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .item-meta {
+      font-size: 8.2pt;
+      font-weight: 500;
+      color: #64748b;
+    }
+
+    .item-tech {
+      font-size: 8.2pt;
+      font-weight: 600;
+      color: #0284c7;
+      margin-bottom: 2px;
+    }
+
+    .bullet-list {
+      list-style-type: square;
+      padding-left: 15px;
+      color: #334155;
+      font-size: 8.6pt;
+    }
+
+    .bullet-list li {
+      margin-bottom: 2px;
+      line-height: 1.35;
+    }
+
+    /* Footer / Langues */
+    .two-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .tag {
+      background: #f1f5f9;
+      color: #334155;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 8pt;
+      display: inline-block;
+      margin: 1px 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRE D'ACTION AVEC BOUTON DE TÉLÉCHARGEMENT PDF DIRECT -->
+  <div class="action-bar">
+    <div>
+      <strong>CV Jihed Chiha</strong> — Format A4 Professionnel
+    </div>
+    <button class="btn-download" onclick="window.print()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Enregistrer en PDF / Télécharger
+    </button>
+  </div>
+
+  <div class="cv-container">
+    <!-- EN-TÊTE -->
+  <header class="header">
+    <div class="header-left">
+      <h1>Jihed Chiha</h1>
+      <h2>Élève Ingénieur — IoT & Robotique</h2>
+    </div>
+    <div class="header-right">
+      📍 Sousse, Tunisie<br>
+      ✉️ <a href="mailto:chihajihed3@gmail.com">chihajihed3@gmail.com</a><br>
+      🔗 <a href="https://github.com/jihedchiha" target="_blank">github.com/jihedchiha</a> | 💼 <a href="https://www.linkedin.com/in/chiha-jihed-b02883337/" target="_blank">LinkedIn</a>
+    </div>
+  </header>
+
+  <!-- PROFIL -->
+  <section class="section">
+    <h3 class="section-title">Profil Professionnel</h3>
+    <p class="profile-text">
+      Élève ingénieur en <strong>4ᵉ année</strong> à l'<strong>EPI Sousse</strong> (Spécialité IoT & Robotique), fort de 2 années de cycle préparatoire intensif et d'une 3ᵉ année de tronc commun en génie logiciel. Doté d'une double compétence technique solide reliant le <strong>matériel embarqué</strong> (ESP32, Arduino, lois de Kirchhoff, capteurs/actionneurs) et le <strong>développement logiciel full-stack</strong> (Angular, Django, Spring Boot, Java, C/C++). Autonome et rigoureux, avec des projets concrets publiés sur GitHub (notamment une application EMS complète en Angular/Django), je recherche un stage pour mettre en œuvre cette polyvalence hardware/software.
+    </p>
+  </section>
+
+  <!-- COMPÉTENCES -->
+  <section class="section">
+    <h3 class="section-title">Compétences Techniques</h3>
+    <div class="skills-grid">
+      <div class="skill-row">
+        <span class="skill-category">IoT & Systèmes Embarqués :</span>
+        <span class="skill-list">ESP32, Arduino (Uno/Nano), Câblage de circuits, Lois de Kirchhoff, Capteurs (Ultrasons, LDR, Temp.), Actionneurs (Buzzer, Moteur, LED), Wi-Fi, Bluetooth.</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-category">Langages de Programmation :</span>
+        <span class="skill-list">C, C++, Python, Java (POO / Avancé), JavaScript, PHP, SQL, MATLAB.</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-category">Développement Web & APIs :</span>
+        <span class="skill-list">Angular, Django REST Framework, Spring Boot, Bootstrap, HTML5, CSS3, RESTful APIs.</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-category">Outils & Environnements :</span>
+        <span class="skill-list">Git, GitHub, VS Code, Arduino IDE, IntelliJ IDEA, Postman, Linux, Windows.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS SIGNIFICATIFS -->
+  <section class="section">
+    <h3 class="section-title">Projets Significatifs</h3>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-title">Smart Cane — Système IoT d'Assistance pour Malvoyants</span>
+        <span class="item-meta">En cours | Spécialité IoT</span>
+      </div>
+      <div class="item-tech">ESP32 / Arduino • Capteur Ultrasons • Retour Haptique (Vibreur) • Bluetooth • C/C++</div>
+      <ul class="bullet-list">
+        <li>Conception et câblage du système électronique de détection d'obstacles à distance progressive.</li>
+        <li>Programmation embarquée sous ESP32 avec gestion des signaux et retour d'information par vibrations.</li>
+        <li>Préparation de l'interfaçage sans fil Bluetooth pour la transmission d'alertes en temps réel.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-title">Pulse Lab EMS — Application de Gestion de Salle de Sport</span>
+        <span class="item-meta">Projet Personnel | GitHub</span>
+      </div>
+      <div class="item-tech">Angular • Django REST Framework • Python • Bootstrap • Base de données relationnelle</div>
+      <ul class="bullet-list">
+        <li>Projet développé en totale autonomie (auto-formation sur Angular et Django).</li>
+        <li>Création d'une API REST sécurisée avec Django REST (authentification, gestion des adhérents et abonnements).</li>
+        <li>Développement d'un frontend réactif avec Angular et Bootstrap avec intégration complète des flux de données.</li>
+        <li>Gestion du code source et versioning complet sur GitHub.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-title">Laboratoire Électronique & Mini-Projets Matériels</span>
+        <span class="item-meta">Prépa & Tronc Commun</span>
+      </div>
+      <div class="item-tech">Circuits électriques • Ponts diviseurs • Arduino • ESP32 • Breadboard</div>
+      <ul class="bullet-list">
+        <li>Mise en application pratique des lois des mailles et des nœuds sur circuits réels en TP.</li>
+        <li>Conception de prototypes interactifs autonomes (alarmes à buzzer, indicateurs LED, gestion de capteurs).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FORMATION -->
+  <section class="section">
+    <h3 class="section-title">Formation Académique</h3>
+
+    <div class="item">
+      <div class="item-header">
+        <span class="item-title">Diplôme National d'Ingénieur en Informatique</span>
+        <span class="item-meta">2022 – Présent</span>
+      </div>
+      <div class="item-tech">EPI Sousse (École Pluridisciplinaire Internationale) — Sousse, Tunisie</div>
+      <ul class="bullet-list">
+        <li><strong>4ᵉ Année (En cours) :</strong> Spécialité IoT & Robotique (Systèmes communicants, microcontrôleurs avancés, capteurs/actionneurs).</li>
+        <li><strong>3ᵉ Année :</strong> Tronc Commun Informatique (C/C++, Java avancé, SQL, Spring Boot, PHP, projets web).</li>
+        <li><strong>1ʳᵉ & 2ᵉ Années :</strong> Cycle Préparatoire Intégré (Mathématiques, Physique, Lois des circuits et mailles/nœuds, C, Python, MATLAB, TP Électronique).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LANGUES & CENTRES D'INTÉRÊT -->
+  <section class="section">
+    <div class="two-cols">
+      <div>
+        <h3 class="section-title">Langues</h3>
+        <p style="font-size: 8.8pt; color: #334155;">
+          <strong>Arabe :</strong> Langue maternelle<br>
+          <strong>Français :</strong> Courant (professionnel & technique)<br>
+          <strong>Anglais :</strong> Technique
+        </p>
+      </div>
+      <div>
+        <h3 class="section-title">Atouts</h3>
+        <p style="font-size: 8.8pt; color: #334155;">
+          • Autodidacte et forte capacité d'apprentissage<br>
+          • Polyvalence reconnue matériel (Hardware) & logiciel (Software)<br>
+          • Rigueur scientifique et goût pour la résolution de problèmes
+        </p>
+      </div>
+    </div>
+  </section>
+
+  </div> <!-- Fin cv-container -->
+</body>
+</html>
